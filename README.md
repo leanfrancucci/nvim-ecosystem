@@ -19,4 +19,55 @@ The Dockerfile in the nvim-c directory, based on the nvim image, installs
 specific tools for C/C++ development such as Clang, Gdb, Gcov, Lcov, Ceedling,
 and Codechecker, among others.
 
-This project is partially inspired by [nvim-ide](https://github.com/MashMB/nvim-ide).
+This project was partially inspired by [nvim-ide](https://github.com/MashMB/nvim-ide).
+
+## Build Docker base image
+
+```sh
+cd nvim
+docker build -t nvim-ide \
+             --build-arg user=$(id -un) \
+             --build-arg group=$(id -gn) \
+             -f Dockerfile \
+             .
+```
+
+## Build Docker image for C/C++ development
+
+```sh
+cd nvim-c
+docker build -t nvim-ide:c \
+    --build-arg user=$(id -un) \
+    --build-arg group=$(id -gn) \
+    -f Dockerfile \
+    .
+```
+
+## Usage
+
+1. Basic use.
+
+   ```sh
+   cd <your-repository>
+   docker run -it --rm \
+       -v $PWD:/home/$(id -un)/workspace \
+       -u $(id -un):$(id -gn) \
+       --name nvim-ide \
+       nvim-ide:c \
+       nvim
+   ```
+
+2. Interact with nvim-ide mouting some dotfiles from the host machine.
+
+   ```sh
+   cd <your-repository>
+   docker run -it --rm \
+       -v ~/.bashrc:/$(id -un)/.bashrc \
+       -v ~/.gitconfig:/home/$(id -un)/.gitconfig \
+       -v ~/.tmux.conf:/home/$(id -un)/.tmux.conf \
+       -v $PWD:/home/$(id -un)/workspace \
+       -u $(id -un):$(id -gn) \
+       --name nvim-ide \
+       nvim-ide:c \
+       fish
+   ```
