@@ -1,0 +1,9 @@
+[core]
+	editor = nvim
+	autocrlf = input
+[merge]
+	tool = vimdiff
+[commit]
+	template = /root/.gitmessage
+[safe]
+	directory = /root/workspace
