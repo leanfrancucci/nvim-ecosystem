@@ -60,6 +60,7 @@ call plug#begin('~/.config/nvim/plugins')
   "Plug 'neomake/neomake'
   " Better language packs
   "Plug 'sheerun/vim-polyglot'
+  Plug 'olimorris/codecompanion.nvim', { 'branch': 'master' }  
 call plug#end()
 
 " Extensions configuration
@@ -86,3 +87,4 @@ source ~/.config/nvim/coc/coc.vim
 source ~/.config/nvim/coc/extensions.vim
 source ~/.config/nvim/dashboard/dashboard.lua
 source ~/.config/nvim/colorschemes/colorschemes.vim
+source ~/.config/nvim/codecompanion/codecompanion.vim
