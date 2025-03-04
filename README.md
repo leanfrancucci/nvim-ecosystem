@@ -57,7 +57,20 @@ docker build -t nvim-ide:c \
        nvim
    ```
 
-2. Interact with nvim-ide mouting some dotfiles from the host machine.
+2. Pass host environment variables to use AI plugins
+
+   ```sh
+   cd <your-repository>
+   docker run -it --rm \
+       -v $PWD:/home/$(id -un)/workspace \
+       -u $(id -un):$(id -gn) \
+       -e <LLM>_API_KEY:$<LLM>_API_KEY \
+       --name nvim-ide \
+       nvim-ide:c \
+       nvim
+   ```
+
+3. Interact with nvim-ide mouting some dotfiles from the host machine.
 
    ```sh
    cd <your-repository>
