@@ -1,9 +1,8 @@
 # Docker file for base Neovim image.
 #
-# @author Maciej Bedra
+# @author Leandro Francucci
 
-# Debian image as base (unstable for newest software).
-#FROM debian:sid-20211220
+# Debian image as base
 FROM debian:12
 
 # Set image locale.
@@ -30,19 +29,6 @@ ARG GIT_FLOW_GITHUB='https://github.com/petervanderdoes/gitflow-avh.git'
 ARG GIT_FLOW_DIR='gitflow-avh'
 
 # Update repositories and install software:
-# 1. curl.
-# 2. fzf for fast file search.
-# 3. ripgrep for fast text occurrence search.
-# 4. tree for files tree visualization.
-# 5. Git.
-# 6. Lazygit for Git visualization.
-# 7. xclip for clipboard handling.
-# 8. Python 3.
-# 9. pip for Python.
-# 10. NodeJS.
-# 11. npm for NodeJS.
-# 12. tzdata to set default container timezone.
-# 13. Everything needed to install Neovim from source.
 RUN apt-get update && \
     apt-get -y install \
     curl \
@@ -96,37 +82,27 @@ RUN groupadd -g 1000 $group && \
 USER $user
 
 # Create directory for Neovim spell check dictionaries.
-#RUN mkdir -p /root/.local/share/nvim/site/spell
-#COPY ./home/ /${user}/
 RUN mkdir -p /home/${user}/.local/share/nvim/site/spell
 
 # Copy Neovim dictionaries.
-#COPY ./spell/ /root/.local/share/nvim/site/spell/
 COPY ./spell/ /home/${user}/.local/share/nvim/site/spell/
 
 # Install Vim Plug.
-#RUN curl -fLo /root/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-#USER root
 RUN curl -fLo /home/${user}/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-#USER $user
 
 # Create directory for Neovim configuration files.
-#RUN mkdir -p /root/.config/nvim
 RUN mkdir -p /home/${user}/.config/nvim
 
 # Copy Neovim configuration files.
-#COPY ./config/ /root/.config/nvim/
 COPY ./config/ /home/${user}/.config/nvim/
 
 # Install Neovim extensions.
 RUN nvim --headless +PlugInstall +qall
 
 # Create directory for Neovim COC extensions.
-#RUN mkdir -p /root/.config/coc/extensions
 RUN mkdir -p /home/${user}/.config/coc/extensions
 
 # Install Neovim COC extensions.
-#RUN cd /root/.config/coc/extensions && npm install $COC --global --only=prod
 USER root
 RUN cd /home/${user}/.config/coc/extensions && npm install $COC --global --only=prod
 USER $user
@@ -148,8 +124,7 @@ USER $user
 #RUN rm -rf /home/${user}/TMP
 
 # Bash aliases
-#COPY ./home/ /root/
-#COPY ./home/ /${user}/
+COPY ./home/ /${user}/
 
 # Change configuration file permissions
 USER root
@@ -159,19 +134,15 @@ RUN chown -R $user:$group \
 USER $user
 
 # Tmux configuration files
-#COPY ./tmux /root/
 COPY --chown=$user:$group ./tmux /home/${user}/
 
 # Git configuration files
-#COPY ./git /root/
 COPY --chown=$user:$group ./git /home/${user}/
 
 # Create directory for projects (there should be mounted from host).
-#RUN mkdir -p /root/workspace
 RUN mkdir -p /home/${user}/workspace
 
 # Set default location after container startup.
-#WORKDIR /root/workspace
 WORKDIR /home/${user}/workspace
 
 # Avoid container exit.
