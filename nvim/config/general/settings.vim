@@ -16,24 +16,6 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileformat=unix
 
-" Smaller pop up menu
-"set pumheight=10
-
-" Show cursor position all the time
-"set ruler
-
-" More space for messages
-"set cmdheight=2
-
-" Treat dash separated words as a word text object
-"set iskeyword+=-
-
-" Enable mouse
-"set mouse=a
-
-" 256 colors support
-"set t_Co=256
-
 " Enables 24-bit RGB color
 set termguicolors
 
@@ -69,15 +51,6 @@ set cursorline
 
 " Smooth scroll
 set so=999
-
-" Max line length
-"set colorcolumn=120
-
-" Background color
-"set background=dark
-
-" Transparent background
-"autocmd VimEnter * hi Normal ctermbg=none
 
 " Disable backup
 set nobackup
