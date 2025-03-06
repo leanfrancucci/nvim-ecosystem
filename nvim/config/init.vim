@@ -13,6 +13,7 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'preservim/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'ryanoasis/vim-devicons'
+  Plug 'nvim-tree/nvim-web-devicons'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-treesitter/nvim-treesitter'
@@ -60,7 +61,10 @@ call plug#begin('~/.config/nvim/plugins')
   "Plug 'neomake/neomake'
   " Better language packs
   "Plug 'sheerun/vim-polyglot'
+  " AI
   Plug 'olimorris/codecompanion.nvim', { 'branch': 'master' }  
+  " Improve markdown viewing
+  Plug 'MeanderingProgrammer/render-markdown.nvim'
 call plug#end()
 
 " Extensions configuration
@@ -88,3 +92,4 @@ source ~/.config/nvim/coc/extensions.vim
 source ~/.config/nvim/dashboard/dashboard.lua
 source ~/.config/nvim/colorschemes/colorschemes.vim
 source ~/.config/nvim/codecompanion/codecompanion.vim
+source ~/.config/nvim/render-markdown/render-markdown.vim
