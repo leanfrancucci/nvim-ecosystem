@@ -26,6 +26,7 @@ RUN apt-get -y update && \
         clang-format \
         tzdata \
         gdb \
+        doxygen \
     && rm -rf /var/lib/apt/lists/*
 RUN gem install \
         ceedling
