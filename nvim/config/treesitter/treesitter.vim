@@ -14,9 +14,8 @@ lua << EOF
       disable = {},
     },
     ensure_installed = {
-      "css",
-      "html",
-      "javascript",
+      "markdown",
+      "markdown_inline",
       "json",
       "yaml"
     },
