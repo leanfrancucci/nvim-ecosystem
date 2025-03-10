@@ -87,9 +87,9 @@ source ~/.config/nvim/asynctasks/asynctasks.vim
 source ~/.config/nvim/log-highlighting/log-highlighting.vim
 source ~/.config/nvim/notify/notify.vim
 source ~/.config/nvim/snippets/snippets.vim
-source ~/.config/nvim/coc/coc.vim
-source ~/.config/nvim/coc/extensions.vim
 source ~/.config/nvim/dashboard/dashboard.lua
 source ~/.config/nvim/colorschemes/colorschemes.vim
 source ~/.config/nvim/codecompanion/codecompanion.vim
 source ~/.config/nvim/render-markdown/render-markdown.vim
+source ~/.config/nvim/coc/coc.vim
+source ~/.config/nvim/coc/extensions.vim
