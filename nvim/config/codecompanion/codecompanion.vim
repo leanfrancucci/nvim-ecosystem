@@ -10,7 +10,15 @@ lua << EOF
       },
       inline = {
         adapter = "gemini",
+        keymaps = {
+          accept_change = {
+            modes = { n = "ga" },
+          },
+          reject_change = {
+            modes = { n = "<leader>gr" },
+          },
+        },
       },
-    }
+    },
   })
 EOF
