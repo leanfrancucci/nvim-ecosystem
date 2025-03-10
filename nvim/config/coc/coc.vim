@@ -5,8 +5,6 @@
 " Customize highlight colors
 hi CocHighlightText ctermbg=242 guibg=#494949
 hi CocListLine ctermbg=242 guibg=#494949
-hi CursorLine ctermbg=238 guibg=#494949
-hi SignColumn ctermbg=NONE
 
 let g:coc_disable_startup_warning = 1
 
