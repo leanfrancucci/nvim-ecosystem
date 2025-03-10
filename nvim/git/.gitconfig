@@ -4,6 +4,6 @@
 [merge]
 	tool = vimdiff
 [commit]
-	template = /root/.gitmessage
+	template = ~/.gitmessage
 [safe]
 	directory = /root/workspace
