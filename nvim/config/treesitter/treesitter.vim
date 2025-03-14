@@ -17,7 +17,9 @@ lua << EOF
       "markdown",
       "markdown_inline",
       "json",
-      "yaml"
+      "yaml",
+      "bash",
+      "diff"
     },
   }
 EOF
