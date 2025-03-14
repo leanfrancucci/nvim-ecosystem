@@ -65,6 +65,8 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'olimorris/codecompanion.nvim', { 'branch': 'master' }  
   " Improve markdown viewing
   Plug 'MeanderingProgrammer/render-markdown.nvim'
+  " Highlight and search for todo comments
+  Plug 'folke/todo-comments.nvim'
 call plug#end()
 
 " Extensions configuration
@@ -93,3 +95,4 @@ source ~/.config/nvim/codecompanion/codecompanion.vim
 source ~/.config/nvim/render-markdown/render-markdown.vim
 source ~/.config/nvim/coc/coc.vim
 source ~/.config/nvim/coc/extensions.vim
+source ~/.config/nvim/todo-comments/todo-comments.vim
