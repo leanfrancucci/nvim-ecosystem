@@ -31,6 +31,8 @@ ARG GIT_FLOW_DIR='gitflow-avh'
 # Update repositories and install software:
 RUN apt-get update && \
     apt-get -y install \
+    locales \
+    locales-all \
     curl \
     fzf \
     ripgrep \
@@ -59,6 +61,18 @@ RUN apt-get update && \
     clang-tidy \
     clang-format \
     && rm -rf /var/lib/apt/lists/*
+
+# Install a specific and modern version of clang-format
+RUN echo "deb http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-18 main" >> /etc/apt/sources.list && \
+    echo "# deb-src http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-18 main" >> /etc/apt/sources.list
+#RUN echo "deb http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-19 main" >> /etc/apt/sources.list && \
+    #echo "# deb-src http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-19 main" >> /etc/apt/sources.list
+RUN curl -o llvm-snapshot.gpg.key https://apt.llvm.org/llvm-snapshot.gpg.key && \
+    apt-key add llvm-snapshot.gpg.key && \
+    apt-get update && apt-get install -y clang-format-18 && \
+    #clang-19 clang-tools-19 libclang1-19 clang-format-19 clangd-19 clang-tidy-19 && \
+    ln -sfn /usr/bin/clang-format-18 /usr/bin/clang-format && \
+    ln -sfn /usr/share/vim/addons/syntax/clang-format-18.py /usr/share/vim/addons/syntax/clang-format.py
 
 # Cooperate Neovim with Python 3.
 RUN pip3 install pynvim --break-system-packages

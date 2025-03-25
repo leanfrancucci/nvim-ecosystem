@@ -21,15 +21,11 @@ RUN apt-get -y update && \
         gcc-multilib \
         g++-multilib \
         build-essential \
-        clang \
-        clang-tidy \
-        clang-format \
-        tzdata \
         gdb \
         doxygen \
     && rm -rf /var/lib/apt/lists/*
 RUN gem install \
-        ceedling
+        ceedling -v 0.31.1
 RUN pip install \
         gcovr \
         gitlint \
