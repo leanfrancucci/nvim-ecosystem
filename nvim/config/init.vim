@@ -57,16 +57,28 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'nvimdev/dashboard-nvim'
   " Indent
   "Plug 'lukas-reineke/indent-blankline.nvim'
-  " Linters
-  "Plug 'neomake/neomake'
-  " Better language packs
-  "Plug 'sheerun/vim-polyglot'
   " AI
   Plug 'olimorris/codecompanion.nvim', { 'branch': 'master' }  
   " Improve markdown viewing
   Plug 'MeanderingProgrammer/render-markdown.nvim'
   " Highlight and search for todo comments
   Plug 'folke/todo-comments.nvim'
+  "Single tabpage interface for easily cycling through diffs for all modified 
+  "files for any git rev.
+  Plug 'sindrets/diffview.nvim'
+  "Remember your Neovim keymaps
+  Plug 'folke/which-key.nvim'
+  "Completely replaces the UI for messages, cmdline and the popupmenu
+  Plug 'folke/noice.nvim'
+  Plug 'MunifTanjim/nui.nvim'
+  "Convert a piece of text to an indicated string case
+  Plug 'johmsalas/text-case.nvim'
+  "Intelligent prioritization when selecting files 
+  Plug 'nvim-telescope/telescope-frecency.nvim'
+  "Windows manager
+  Plug 'anuvyklack/windows.nvim'
+  Plug 'anuvyklack/middleclass'
+  Plug 'anuvyklack/animation.nvim'
 call plug#end()
 
 " Extensions configuration
@@ -96,3 +108,9 @@ source ~/.config/nvim/render-markdown/render-markdown.vim
 source ~/.config/nvim/coc/coc.vim
 source ~/.config/nvim/coc/extensions.vim
 source ~/.config/nvim/todo-comments/todo-comments.vim
+source ~/.config/nvim/diffview/diffview.vim
+source ~/.config/nvim/which-key/which-key.vim
+source ~/.config/nvim/noice/noice.vim
+source ~/.config/nvim/testcase/testcase.vim
+source ~/.config/nvim/frecency/frecency.vim
+source ~/.config/nvim/windows/windows.vim

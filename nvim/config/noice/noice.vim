@@ -3,5 +3,5 @@
 " @author Leandro Francucci
 "
 lua << EOF
-require('notify').setup()
+require('noice').setup()
 EOF
