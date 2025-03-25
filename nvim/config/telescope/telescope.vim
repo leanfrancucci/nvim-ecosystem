@@ -51,6 +51,13 @@ lua << EOF
       qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
       buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
       disable_devicons = false,
-    }
+    },
+    extensions = {
+      frecency = {
+        auto_validate = false,
+        matcher = "fuzzy",
+        path_display = { "filename_first" },
+      },
+    },
   }
 EOF
