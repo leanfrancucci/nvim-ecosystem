@@ -3,10 +3,14 @@
 " @author Maciej Bedra
 
 " Key binding used to launch fuzzy finder (file search)
-nmap <C-_> <cmd>Telescope find_files<CR>
+nmap ,e <cmd>Telescope find_files<CR>
 
-" Key binding used to launch fuzzy finder (text occurrence)
-nmap <C-_><C-_> <cmd>Telescope live_grep<CR>
+" Launch fuzzy finder (text occurrence)
+nmap ,p <cmd>Telescope live_grep<CR>
+
+" Launch fuzzy finder (text occurrence)
+" with the word under the cursor pre filled
+nmap ,wp <cmd>Telescope grep_string<CR>
 
 " Telescope defaults.
 lua << EOF

@@ -37,7 +37,7 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Use `[g` and `]g` to navigate diagnostics
+" Use `[g` and `]g` to navigPlug 'lukas-reineke/indent-blankline.nvim'ate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -47,6 +47,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> <C-LeftMouse> <LeftMouse> <Plug>(coc-definition)
 nnoremap <silent> gf :<C-u>CocCommand document.showIncomingCalls<CR>
 
 " Use K to show documentation in preview window

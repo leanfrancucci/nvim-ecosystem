@@ -3,7 +3,8 @@
 # @author Leandro Francucci
 
 # Base Neovim image.
-FROM nvim-ide:latest
+ARG BASE_TAG=latest
+FROM nvim-ide:${BASE_TAG}
 
 USER root
 RUN apt-get -y update && \
@@ -53,11 +54,15 @@ RUN wget http://www.spinroot.com/uno/uno_v214.tar.gz && \
     cd / && rm -f uno_v214.tar.gz
 
 # Download, build and install infer
-ARG INFER_VERSION=1.1.0
-RUN wget https://github.com/facebook/infer/releases/download/v$INFER_VERSION/infer-linux64-v$INFER_VERSION.tar.xz && \
+#ARG INFER_VERSION=1.1.0
+#RUN wget https://github.com/facebook/infer/releases/download/v$INFER_VERSION/infer-linux64-v$INFER_VERSION.tar.xz && \
     #tar xvf infer-linux64-v$INFER_VERSION.tar.xz -C /opt/ && rm -f infer-linux64-v$INFER_VERSION.tar.xz && \
     #ln -s "/opt/infer-linux64-v$INFER_VERSION/bin/infer" /usr/local/bin/infer
-    tar xvf infer-linux64-v$INFER_VERSION.tar.xz -C /opt/ && rm -f infer-linux64-v$INFER_VERSION.tar.xz
+ARG INFER_VERSION=1.2.0
+ARG INFER_ARTIFACT=infer-linux-x86_64-v$INFER_VERSION.tar.xz
+RUN wget https://github.com/facebook/infer/releases/download/v$INFER_VERSION/$INFER_ARTIFACT && \
+    tar xvf ${INFER_ARTIFACT} -C /opt/ && rm -f ${INFER_ARTIFACT} && \
+    ln -s "/opt/infer-linux-x86_64-v$INFER_VERSION/bin/infer" /usr/local/bin/infer
 
 # Switch to the custom user
 ARG user=appuser

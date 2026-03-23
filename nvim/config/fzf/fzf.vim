@@ -8,14 +8,6 @@ let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --ma
 " Fuzzy finder as pop up
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6 } }
 
-" Launch fuzzy finder (text occurrence)
-nmap ,p :Rg<CR>
-" the same, but with the word under the cursor pre filled
-nmap ,wp :execute ":Rg " . expand('<cword>')<CR>
-
-" File finder mapping
-nmap ,e :Files<CR>
-
 " Tags (symbols) in current file finder mapping
 nmap ,g :BTag<CR>
 " the same, but with the word under the cursor pre filled

@@ -60,6 +60,7 @@ RUN apt-get update && \
     fish \
     clang-tidy \
     clang-format \
+    gpg \
     && rm -rf /var/lib/apt/lists/*
 
 # Install a specific and modern version of clang-format
@@ -74,8 +75,22 @@ RUN curl -o llvm-snapshot.gpg.key https://apt.llvm.org/llvm-snapshot.gpg.key && 
     ln -sfn /usr/bin/clang-format-18 /usr/bin/clang-format && \
     ln -sfn /usr/share/vim/addons/syntax/clang-format-18.py /usr/share/vim/addons/syntax/clang-format.py
 
+# Eza: A modern, maintained replacement for ls
+RUN mkdir -p /etc/apt/keyrings \
+    && curl -sL https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | tee /etc/apt/sources.list.d/gierens.list \
+    && chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list \
+    && apt update && apt install -y eza
+
 # Cooperate Neovim with Python 3.
 RUN pip3 install pynvim --break-system-packages
+
+# VectorCode is a code repository indexing tool. It helps us write 
+# better prompt for your coding LLMs
+RUN pip3 install vectorcode accelerate --break-system-packages
+
+# Tools for deploying and releasing
+RUN pip3 install GitPython --break-system-packages
 
 # Cooperate NodeJS with Neovim.
 RUN npm i -g neovim
@@ -89,8 +104,8 @@ RUN rm -rf /root/TMP
 # Create a custom user with UID 1234 and GID 1234
 ARG user=appuser
 ARG group=appgroup
-RUN groupadd -g 1000 $group && \
-    useradd -m -u 1000 -g $group $user
+RUN useradd -m -s /usr/bin/fish $user && \
+    echo "$user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
  
 # Switch to the custom user
 USER $user
@@ -108,7 +123,7 @@ RUN curl -fLo /home/${user}/.local/share/nvim/site/autoload/plug.vim --create-di
 RUN mkdir -p /home/${user}/.config/nvim
 
 # Copy Neovim configuration files.
-COPY ./config/ /home/${user}/.config/nvim/
+COPY --chown=$user:$group ./config/ /home/${user}/.config/nvim/
 
 # Install Neovim extensions.
 RUN nvim --headless +PlugInstall +qall
@@ -138,7 +153,14 @@ USER $user
 #RUN rm -rf /home/${user}/TMP
 
 # Bash aliases
-COPY ./home/ /${user}/
+COPY --chown=$user:$group ./home/ /${user}/
+#COPY ./home/ /${user}/
+
+# Fish plugins
+SHELL ["/usr/bin/fish", "-c"]
+RUN curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish \
+    | source && fisher install jorgebucaran/fisher
+RUN fisher install catppuccin/fish matt-ftw/fzf.fish jorgebucaran/autopair.fish
 
 # Change configuration file permissions
 USER root
@@ -147,11 +169,21 @@ RUN chown -R $user:$group \
     /home/${user}/.config/coc/extensions
 USER $user
 
-# Tmux configuration files
+# Copy configuration files
 COPY --chown=$user:$group ./tmux /home/${user}/
-
-# Git configuration files
 COPY --chown=$user:$group ./git /home/${user}/
+COPY --chown=$user:$group ./fish /home/${user}/.config/fish
+COPY --chown=$user:$group ./starship /home/${user}/.config
+
+# Install Gemini CLI
+#USER root
+#RUN npm install -g @google/gemini-cli
+#USER $user
+
+# Install Starship
+USER root
+RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
+USER $user
 
 # Create directory for projects (there should be mounted from host).
 RUN mkdir -p /home/${user}/workspace

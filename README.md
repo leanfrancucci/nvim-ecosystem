@@ -84,3 +84,59 @@ docker build -t nvim-ide:c \
        nvim-ide:c \
        fish
    ```
+
+## Utilizing the clipboard from within a Docker container
+
+To do it is necessary to handle X server authentication and establish a 
+connection between the container and the host's X server. The $XAUTHORITY 
+variable plays a crucial role in this process. It specifies the location 
+of the X authority file, which contains the security credentials used to 
+authorize connections to the X server.
+
+Here's how to access the host's clipboard from a Docker container:
+
+### Alternative 1: using `xhost`
+
+Run the following command on the host before running the container.
+
+```bash
+xhost +local:$(id -un)
+```
+
+### Alternative 2: using `xauth`
+
+1. Obtain X authentication token
+    1. On the host machine, run `xauth list`
+    2. Identify the line corresponding to your display (e.g., <hostname>/unix:0)
+    3. Copy the entire line, which represents the X authentication token
+2. Prepare the container
+    1. Run the container
+
+    ```bash
+    docker run -it --rm \
+        -v ~/.bashrc:/$(id -un)/.bashrc \
+        -v ~/.gitconfig:/home/$(id -un)/.gitconfig \
+        -v ~/.tmux.conf:/home/$(id -un)/.tmux.conf \
+        -v $PWD:/home/$(id -un)/workspace \
+        -e DISPLAY \
+        -e GEMINI_API_KEY=$GEMINI_API_KEY \
+        -e ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY \
+        -u $(id -un):$(id -gn) \
+        --name nvim-ide \
+        nvim-ide:c \
+        fish
+    ```
+
+    2. Inside the Docker container, create the X authority file
+
+    ```bash
+    touch ~/.Xauthority
+    ```
+
+    3. Add the copied X authentication token to the container's X authority
+
+    ```bash
+    bash
+    HEXKEY=<copy from host>
+    xauth add $HOSTNAME/unix$DISPLAY MIT-MAGIC-COOKIE-1 $HEXKEY
+    ```

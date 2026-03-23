@@ -16,7 +16,7 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'nvim-tree/nvim-web-devicons'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/nvim-treesitter', { 'tag': 'v0.10.0', 'do': ':TSUpdate' }
   Plug 'nvim-telescope/telescope-fzf-native.nvim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -30,6 +30,12 @@ call plug#begin('~/.config/nvim/plugins')
   " A couple of nice colorschemes
   Plug 'patstockwell/vim-monokai-tasty'
   Plug 'rafi/awesome-vim-colorschemes'
+  Plug 'haishanh/night-owl.vim'
+  Plug 'Rigellute/rigel'
+  Plug 'kartikp10/noctis.nvim'
+  Plug 'rktjmp/lush.nvim' " noctis dependence
+  Plug 'rebelot/kanagawa.nvim'
+  Plug 'Mofiqul/vscode.nvim'
   " Pending tasks list
   Plug 'fisadev/FixedTaskList.vim'
   " Window chooser
@@ -56,9 +62,11 @@ call plug#begin('~/.config/nvim/plugins')
   " Dashboard
   Plug 'nvimdev/dashboard-nvim'
   " Indent
-  "Plug 'lukas-reineke/indent-blankline.nvim'
+  Plug 'lukas-reineke/indent-blankline.nvim'
   " AI
-  Plug 'olimorris/codecompanion.nvim', { 'branch': 'master' }  
+  Plug 'olimorris/codecompanion.nvim', { 'branch': 'main' }
+  " Codecompanion history extension
+  Plug 'ravitemer/codecompanion-history.nvim'
   " Improve markdown viewing
   Plug 'MeanderingProgrammer/render-markdown.nvim'
   " Highlight and search for todo comments
@@ -79,6 +87,26 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'anuvyklack/windows.nvim'
   Plug 'anuvyklack/middleclass'
   Plug 'anuvyklack/animation.nvim'
+  "Terminal emulator
+  Plug 'akinsho/toggleterm.nvim'
+  "Session manager
+  Plug 'stevearc/resession.nvim'
+  "Diff manager
+  Plug 'echasnovski/mini.nvim'
+  "Extensible UI for Neovim notifications
+  Plug 'j-hui/fidget.nvim'
+  "A snazzy 💅 buffer line (with tabpage integration) for Neovim built using lua.
+  Plug 'akinsho/bufferline.nvim'
+  "Git branch viewer for Vim/Neovim
+  Plug 'rbong/vim-flog'
+  "Surround selections, stylishly 😎
+  Plug 'kylechui/nvim-surround'
+  "URL highlight everywhere
+  Plug 'itchyny/vim-highlighturl'
+  "nvim-ufo dependence
+  Plug 'kevinhwang91/promise-async'
+  "It makes Neovim's fold look modern and keep high performance.
+  Plug 'kevinhwang91/nvim-ufo'
 call plug#end()
 
 " Extensions configuration
@@ -114,3 +142,12 @@ source ~/.config/nvim/noice/noice.vim
 source ~/.config/nvim/testcase/testcase.vim
 source ~/.config/nvim/frecency/frecency.vim
 source ~/.config/nvim/windows/windows.vim
+source ~/.config/nvim/toggleterm/toggleterm.vim
+source ~/.config/nvim/resession/resession.vim
+source ~/.config/nvim/mini-diff/mini-diff.vim
+source ~/.config/nvim/fidget/fidget.vim
+source ~/.config/nvim/bufferline/bufferline.vim
+source ~/.config/nvim/vimflog/vimflog.vim
+source ~/.config/nvim/indent-blankline/indent-blankline.vim
+source ~/.config/nvim/surround/surround.vim
+source ~/.config/nvim/ufo/ufo.vim

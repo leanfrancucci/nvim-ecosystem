@@ -10,7 +10,7 @@ lua << EOF
       disable = {},
     },
     indent = {
-      enable = false,
+      enable = true,
       disable = {},
     },
     ensure_installed = {
@@ -19,7 +19,11 @@ lua << EOF
       "json",
       "yaml",
       "bash",
-      "diff"
+      "diff",
+      "regex",
+      "c",
+      "lua",
+      "cpp"
     },
   }
 EOF

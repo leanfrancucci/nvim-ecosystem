@@ -3,7 +3,7 @@
 " @author Maciej Bedra
 
 " Status bar theme
-let g:airline_theme = 'monokai_tasty'
+let g:airline_theme = 'rigel'
 
 " ?
 let g:airline#extensions#whitespace#enabled = 0

@@ -95,5 +95,9 @@ set wildmenu
 " diagnostics appear/become resolved
 set signcolumn=yes
 
+" Enable Doxygen syntax highlighting
+let g:load_doxygen_syntax=1
+let doxygen_end_punctuation='[\\]'
+
 " init.lua
 lua require('init')
